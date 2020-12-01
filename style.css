@@ -1,6 +1,6 @@
 body {
   box-sizing: border-box;
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: LibreBaskerville-Regular,Palatino Linotype,Times New Roman,serif;
   color: #242424;
   width: 100%;
   background-color: white;
@@ -28,15 +28,15 @@ h4,
 h5,
 h6,
 #sideNav {
-  font-family: "Poppins", sans-serif;
+  font-family: LibreBaskerville-Regular,Palatino Linotype,Times New Roman,serif;
   font-weight: 700;
 }
 
 h1,
 .mobile-name {
-  font-family: "Just Another Hand", cursive;
-  font-size: 7.5rem;
-  letter-spacing: 0.1rem;
+  font-family: LibreBaskerville-Regular,Palatino Linotype,Times New Roman,serif;
+  font-size: 5.5rem;
+  letter-spacing: 0.05rem;
 }
 
 h1,
