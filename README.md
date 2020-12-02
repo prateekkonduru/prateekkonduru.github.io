@@ -8,7 +8,7 @@ This is a simple yet elegant website created with the help of a free Bootstrap t
 
 ## Live Preview
 
-<p><a href="" target="_blank"> <img src="https://github.com/DrSavvina/Bootstrap4Resume/blob/master/preview.png"></a></p>
+<p><a href="" target="_blank"> <img src="https://github.com/prateekkonduru/prateekkonduru.github.io/blob/master/preview1.png"></a></p>
 
 ## Technologies Used
 
