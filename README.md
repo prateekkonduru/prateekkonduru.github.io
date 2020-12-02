@@ -1,4 +1,4 @@
-# Bootstrap4Resume
+# Bootstrap4Portoflio
 
 A single-page static website with a fixed sidebar, smooth scrolling navigation, and content sections. Great for an elegant resume or portfolio. Mobile-friendly. 
 
