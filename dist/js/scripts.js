@@ -1,6 +1,6 @@
 /*!
     * Start Bootstrap - Resume v6.0.2 (https://startbootstrap.com/theme/resume)
-    * Copyright 2013-2020 Start Bootstrap
+    * Copyright 2013-2025 Start Bootstrap
     * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-resume/blob/master/LICENSE)
     */
     (function ($) {
@@ -38,5 +38,31 @@
     // Activate scrollspy to add active class to navbar items on scroll
     $("body").scrollspy({
         target: "#sideNav",
+    });
+
+    // Add scroll animations
+    function addScrollAnimations() {
+        const elements = document.querySelectorAll('.resume-section, .d-flex, .subheading, .lead');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('scroll-animate', 'animate');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+        
+        elements.forEach(el => {
+            el.classList.add('scroll-animate');
+            observer.observe(el);
+        });
+    }
+
+    // Initialize scroll animations when DOM is ready
+    $(document).ready(function() {
+        addScrollAnimations();
     });
 })(jQuery); // End of use strict

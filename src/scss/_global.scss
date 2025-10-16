@@ -1,9 +1,18 @@
-// Global styling for this template
+// Modern global styling
 
 body {
     padding-top: $navbar-base-height;
-    color: $gray-600;
+    color: $text-primary;
+    background: $dark-bg-primary;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+    overflow-x: hidden;
+    line-height: 1.6;
+    font-size: 16px;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
+
 @include media-breakpoint-up(lg) {
     body {
         padding-top: 0;
@@ -11,22 +20,74 @@ body {
     }
 }
 
+// Glassmorphism base styles
+.glass-card {
+    background: $glass-bg;
+    backdrop-filter: blur(10px);
+    border: 1px solid $glass-border;
+    border-radius: 15px;
+    box-shadow: 0 8px 32px $glass-shadow;
+}
+
+// Modern typography
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-    text-transform: uppercase;
+    color: $text-primary;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    letter-spacing: -0.025em;
 }
 
 h1 {
-    line-height: 1;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800;
+    background: $gradient-primary;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1.5rem;
+}
+
+h2 {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    color: $text-primary;
+    position: relative;
+    margin-bottom: 2rem;
+    
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        left: 0;
+        width: 60px;
+        height: 3px;
+        background: $gradient-primary;
+        border-radius: 2px;
+    }
+}
+
+h3 {
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    color: $text-primary;
+    font-weight: 600;
+}
+
+h4 {
+    font-size: clamp(1.125rem, 2.5vw, 1.25rem);
+    color: $text-primary;
+    font-weight: 600;
 }
 
 p.lead {
     font-size: 1.15rem;
     font-weight: 400;
+    color: $text-secondary;
+    line-height: 1.6;
 }
 
 .subheading {
@@ -34,4 +95,194 @@ p.lead {
     text-transform: uppercase;
     font-weight: 500;
     font-size: 1.5rem;
+    color: $accent-primary;
+}
+
+// Enhanced text styling
+.text-gradient {
+    background: $gradient-primary;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+// Modern section styling
+.resume-section {
+    background: $dark-bg-card;
+    backdrop-filter: blur(20px);
+    border-radius: 24px;
+    margin: 24px;
+    padding: 48px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 
+        0 4px 6px -1px rgba(0, 0, 0, 0.1),
+        0 2px 4px -1px rgba(0, 0, 0, 0.06),
+        0 0 0 1px rgba(255, 255, 255, 0.05);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: $gradient-primary;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    
+    &:hover {
+        transform: translateY(-8px);
+        box-shadow: 
+            0 20px 25px -5px rgba(0, 0, 0, 0.1),
+            0 10px 10px -5px rgba(0, 0, 0, 0.04),
+            0 0 0 1px rgba(99, 102, 241, 0.1);
+        border-color: rgba(99, 102, 241, 0.2);
+        
+        &::before {
+            opacity: 1;
+        }
+    }
+}
+
+// Modern progress bars
+.progress {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    height: 8px;
+    overflow: hidden;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    
+    .progress-bar {
+        background: $gradient-primary;
+        border-radius: 12px;
+        transition: width 0.6s ease;
+        position: relative;
+        
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            animation: shimmer 2s infinite;
+        }
+    }
+}
+
+// Modern button styling
+.btn {
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.875rem;
+    padding: 12px 24px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+        transition: left 0.6s ease;
+    }
+    
+    &:hover::before {
+        left: 100%;
+    }
+    
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(99, 102, 241, 0.25);
+    }
+    
+    &:active {
+        transform: translateY(0);
+    }
+}
+
+.btn-primary {
+    background: $gradient-primary;
+    color: white;
+    box-shadow: 0 4px 14px rgba(99, 102, 241, 0.3);
+    
+    &:hover {
+        background: $gradient-primary;
+        box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+        color: white;
+    }
+    
+    &:focus {
+        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+    }
+}
+
+// Modern social icons
+.social-icons {
+    display: flex;
+    gap: 16px;
+    margin-top: 2rem;
+    
+    a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 48px;
+        height: 48px;
+        background: $dark-bg-elevated;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        color: $text-secondary;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        text-decoration: none;
+        position: relative;
+        overflow: hidden;
+        
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: $gradient-primary;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        i {
+            position: relative;
+            z-index: 1;
+            transition: color 0.3s ease;
+        }
+        
+        &:hover {
+            transform: translateY(-4px);
+            border-color: rgba(99, 102, 241, 0.3);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.2);
+            
+            &::before {
+                opacity: 1;
+            }
+            
+            i {
+                color: white;
+            }
+        }
+    }
 }
