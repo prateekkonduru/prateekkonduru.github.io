@@ -1,4 +1,4 @@
-// Animation keyframes for modern effects
+// Modern animations for the portfolio
 
 @keyframes fadeInUp {
   from {
@@ -74,30 +74,12 @@
   }
 }
 
-@keyframes typing {
-  from {
-    width: 0;
-  }
-  to {
-    width: 100%;
-  }
-}
-
-@keyframes blink {
-  0%, 50% {
-    border-color: transparent;
-  }
-  51%, 100% {
-    border-color: $accent-primary;
-  }
-}
-
 @keyframes shimmer {
   0% {
-    transform: translateX(-100%);
+    background-position: -200% 0;
   }
   100% {
-    transform: translateX(100%);
+    background-position: 200% 0;
   }
 }
 
@@ -123,39 +105,15 @@
 }
 
 .gradient-shift {
-  animation: gradientShift 3s ease infinite;
+  animation: gradientShift 3s ease-in-out infinite;
 }
 
 .float {
   animation: float 3s ease-in-out infinite;
 }
 
-// Scroll-triggered animations
-.scroll-animate {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.6s ease-out;
-  
-  &.animate {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-// Hover effects
-.hover-glow {
-  transition: all 0.3s ease;
-  
-  &:hover {
-    box-shadow: 0 0 20px rgba(0, 242, 255, 0.5);
-    transform: translateY(-2px);
-  }
-}
-
-.hover-scale {
-  transition: all 0.3s ease;
-  
-  &:hover {
-    transform: scale(1.05);
-  }
+.shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
 }
