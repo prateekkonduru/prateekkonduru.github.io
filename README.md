@@ -9,7 +9,7 @@ Live at: https://prateekkonduru.github.io
 - `index.html` - the live single-file portfolio ("deployment record" design), served at the root
 - `Profile.pdf` - résumé download
 - `og.png` - social share card (1200x630), regenerate from the hero if the design changes
-- `favicon.ico` - favicon
+- `favicon.png` / `favicon.ico` / `apple-touch-icon.png` - the "PK + caret" brand mark (regenerate from a 512px tile if the brand changes)
 - `robots.txt` / `sitemap.xml` / `llms.txt` - crawler, index, and AI-assistant discovery files
 - `PRODUCT.md` / `DESIGN.md` - brand brief and design-system notes for the site
 - `dist/index.html` - legacy URL, now a redirect stub back to `/` (old shared links keep working)
