@@ -13,7 +13,6 @@ Live at: https://prateekkonduru.github.io
 - `robots.txt` / `sitemap.xml` / `llms.txt` - crawler, index, and AI-assistant discovery files
 - `PRODUCT.md` / `DESIGN.md` - brand brief and design-system notes for the site
 - `dist/index.html` - legacy URL, now a redirect stub back to `/` (old shared links keep working)
-- `src/` - legacy Pug/SCSS source for the old Start Bootstrap theme (no longer used by the live site)
 
 ## Design
 
