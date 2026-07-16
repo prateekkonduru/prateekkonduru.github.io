@@ -345,6 +345,10 @@
             margin-bottom: clamp(24px, 4vh, 40px);
             background: oklch(16% 0.008 255 / 0.55);
         }
+        .status .sep { color: var(--ink-faint); }
+        /* The pill never wraps: the third domain yields on small screens */
+        @media (max-width: 720px) { .status .hide-sm { display: none; } }
+        @media (max-width: 380px) { .status { font-size: 10px; letter-spacing: 0; gap: 7px; padding: 8px 11px; white-space: nowrap; } }
         /* The one dot on the page: a live availability flag */
         .pulse { position: relative; width: 7px; height: 7px; flex: none; }
         .pulse::after {
@@ -732,7 +736,7 @@
 <section class="hero" id="top" aria-label="Introduction">
     <canvas id="field" aria-hidden="true"></canvas>
     <div class="wrap">
-        <p class="status rv" style="--d:80ms"><span class="pulse" aria-hidden="true"></span>Forward deployed at Ushur</p>
+        <p class="status rv" style="--d:80ms"><span class="pulse" aria-hidden="true"></span><span>AI Leadership</span><span class="sep" aria-hidden="true">&bull;</span><span>Agentic Systems</span><span class="sep hide-sm" aria-hidden="true">&bull;</span><span class="hide-sm">Enterprise AI</span></p>
         <h1>
             <span class="mask"><span style="--d:120ms">Prateek</span></span>
             <span class="mask"><span style="--d:220ms">Konduru<span class="caret" aria-hidden="true"></span></span></span>

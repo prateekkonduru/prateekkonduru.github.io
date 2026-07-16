@@ -54,6 +54,6 @@ no fake product screenshots.
 
 - Zero em/en-dashes in visible text (hyphens only)
 - Max one middle-dot per metadata line (currently zero)
-- One decorative-adjacent dot on the whole page: the hero status pulse (semantic, currently "Forward deployed at Ushur")
+- One decorative-adjacent dot on the whole page: the hero status pulse (currently fronting the domain strip "AI Leadership / Agentic Systems / Enterprise AI"; third segment hides below 720px so the pill never wraps)
 - No gradient text, no glassmorphism, no side-stripe borders, no stat-card strips
 - Contrast: body text >= 4.5:1, labels >= 4.5:1 at their size, amber-on-graphite CTAs ~8:1
