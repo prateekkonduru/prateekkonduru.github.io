@@ -1,0 +1,20 @@
+# Prateek Konduru
+
+> AI Solutions Leader based in San Jose, CA. Manager of AI Solution Acceleration & Forward Deployment at Ushur, taking agentic AI, LLMs, and RAG systems from discovery to production for Fortune 500 insurance, healthcare, and financial services enterprises. Open to AI leadership roles.
+
+Key facts:
+
+- Current role: Manager, AI Solution Acceleration & Forward Deployment at Ushur (Dec 2025 - present); four promotions at Ushur since Oct 2023
+- Track record: 60% lift in process automation, 85% reduction in manual intervention, $750K/year operational savings from reusable AI accelerators, team of 5 forward-deployed engineers across a $10M+ portfolio, 98% CSAT
+- Current focus: agentic AI in enterprise production (multi-agent systems, MCP, tool calling, LangGraph, LLM evals, guardrails)
+- Earlier roles: Graduate Technical Consultant at Miller Center for Social Entrepreneurship (2021-2023); Solutions Engineer at Oracle (2019-2021); internships at EFI and Zendesk
+- Education: M.S. Computer Science & Engineering, Santa Clara University (2023); B.Tech Computer Engineering, PES University (2019)
+- Certifications: AWS Certified Developer, Google Professional Machine Learning Engineer, Oracle Solutions Architect Associate, Oracle Autonomous Database Specialist
+- Contact: pkonduru4@gmail.com
+
+## Links
+
+- [Portfolio](https://prateekkonduru.github.io/): full profile, experience, and capabilities
+- [Résumé (PDF)](https://prateekkonduru.github.io/Profile.pdf): downloadable résumé
+- [LinkedIn](https://www.linkedin.com/in/prateek-konduru/): professional profile
+- [GitHub](https://github.com/prateekkonduru): code and projects

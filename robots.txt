@@ -1,0 +1,26 @@
+# prateekkonduru.github.io
+# All crawlers welcome, including AI search and assistant bots.
+
+User-agent: *
+Allow: /
+
+# AI search & assistant crawlers (explicitly welcome)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://prateekkonduru.github.io/sitemap.xml
