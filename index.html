@@ -346,9 +346,11 @@
             background: oklch(16% 0.008 255 / 0.55);
         }
         .status .sep { color: var(--ink-faint); }
-        /* The pill never wraps: the third domain yields on small screens */
-        @media (max-width: 720px) { .status .hide-sm { display: none; } }
-        @media (max-width: 380px) { .status { font-size: 10px; letter-spacing: 0; gap: 7px; padding: 8px 11px; white-space: nowrap; } }
+        /* All three domains always show; on narrow screens the strip wraps
+           into tidy rows inside the pill instead of dropping a segment */
+        .status { flex-wrap: wrap; row-gap: 7px; }
+        @media (max-width: 720px) { .status { font-size: 10px; letter-spacing: 0.06em; gap: 8px; row-gap: 6px; } }
+        @media (max-width: 380px) { .status { letter-spacing: 0; gap: 7px; padding: 8px 11px; } }
         /* The one dot on the page: a live availability flag */
         .pulse { position: relative; width: 7px; height: 7px; flex: none; }
         .pulse::after {
@@ -736,14 +738,14 @@
 <section class="hero" id="top" aria-label="Introduction">
     <canvas id="field" aria-hidden="true"></canvas>
     <div class="wrap">
-        <p class="status rv" style="--d:80ms"><span class="pulse" aria-hidden="true"></span><span>AI Leadership</span><span class="sep" aria-hidden="true">&bull;</span><span>Agentic Systems</span><span class="sep hide-sm" aria-hidden="true">&bull;</span><span class="hide-sm">Enterprise AI</span></p>
+        <p class="status rv" style="--d:80ms"><span class="pulse" aria-hidden="true"></span><span>AI Leadership</span><span class="sep" aria-hidden="true">&bull;</span><span>Agentic Systems</span><span class="sep" aria-hidden="true">&bull;</span><span>Enterprise AI</span></p>
         <h1>
             <span class="mask"><span style="--d:120ms">Prateek</span></span>
             <span class="mask"><span style="--d:220ms">Konduru<span class="caret" aria-hidden="true"></span></span></span>
         </h1>
         <div class="hero-foot">
             <p class="hero-sub rv" style="--d:340ms">
-                The <strong>AI layer</strong> between enterprise problems and production.
+                Building the <strong>AI layer</strong> between enterprise problems and production.
             </p>
             <div class="hero-cta rv" style="--d:440ms">
                 <a class="btn btn-solid" href="#contact">
@@ -761,7 +763,7 @@
 
 <section id="about">
     <div class="wrap">
-        <h2 class="h2 rv">The engineer they send in first.</h2>
+        <h2 class="h2 rv">Leading AI from discovery to deployment.</h2>
         <div class="about-grid">
             <div class="about-copy rv" style="--d:80ms">
                 <p>
