@@ -705,6 +705,67 @@
         .foot a { color: var(--ink-dim); text-decoration: none; transition: color 0.2s var(--eo); }
         .foot a:hover { color: var(--ink); }
 
+        /* ============================== CONSOLE (⌘K palette) ============================== */
+        .hero { cursor: crosshair; }
+        .hero a, .hero .btn { cursor: pointer; }
+
+        .console-chip {
+            width: 44px; height: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: none;
+            border: 1px solid var(--line);
+            border-radius: var(--r);
+            color: var(--ink-dim);
+            font-family: var(--mono);
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            cursor: pointer;
+            transition: color 0.2s var(--eo), border-color 0.2s var(--eo);
+        }
+        .console-chip:hover { color: var(--amber); border-color: var(--ink-faint); }
+        .nav-links { margin-left: auto; }
+        @media (max-width: 860px) { .console-chip { margin-left: auto; } }
+
+        body.pal-open { overflow: hidden; }
+        .pal { position: fixed; inset: 0; z-index: 200; display: grid; place-items: start center; padding: min(16vh, 150px) 16px 0; }
+        .pal[hidden] { display: none; }
+        .pal-scrim { position: absolute; inset: 0; background: oklch(10% 0.008 255 / 0.55); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+        .pal-panel {
+            position: relative;
+            width: min(560px, 100%);
+            background: var(--bg-raise);
+            border: 1px solid var(--line);
+            border-radius: var(--r);
+            box-shadow: 0 24px 80px oklch(5% 0.005 255 / 0.55);
+            overflow: hidden;
+        }
+        html.js .pal-panel { animation: palIn 0.16s var(--eo); }
+        @keyframes palIn { from { opacity: 0; transform: scale(0.97) translateY(-8px); } }
+        .pal-head { display: flex; align-items: center; gap: 10px; padding: 14px 16px; border-bottom: 1px solid var(--line-soft); }
+        .pal-prompt { font-family: var(--mono); font-size: 12.5px; font-weight: 600; color: var(--amber); }
+        .pal-head input {
+            flex: 1; min-width: 0;
+            background: none; border: none; outline: none;
+            color: var(--ink);
+            font-family: var(--mono);
+            font-size: 13px;
+        }
+        .pal-head input::placeholder { color: var(--ink-faint); }
+        .pal-head kbd { font-family: var(--mono); font-size: 10px; color: var(--ink-faint); border: 1px solid var(--line); border-radius: 3px; padding: 3px 6px; flex: none; }
+        .pal-list { list-style: none; max-height: min(320px, 44vh); overflow-y: auto; padding: 6px; }
+        .pal-item { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 11px 12px; border-radius: 3px; cursor: pointer; }
+        .pal-item .pi-name { font-family: var(--mono); font-size: 12.5px; color: var(--ink); white-space: nowrap; }
+        .pal-item .pi-hint { font-size: 12.5px; color: var(--ink-faint); text-align: right; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .pal-item[aria-selected="true"] { background: var(--amber-wash); }
+        .pal-item[aria-selected="true"] .pi-name { color: var(--amber); }
+        .pal-empty { padding: 18px 14px; font-family: var(--mono); font-size: 12px; color: var(--ink-faint); }
+        .pal-out { padding: 12px 16px; border-top: 1px solid var(--line-soft); font-family: var(--mono); font-size: 12px; color: var(--amber); }
+        .pal-out[hidden] { display: none; }
+        @media (prefers-reduced-motion: reduce) { html.js .pal-panel { animation: none; } }
+
         @media (max-width: 640px) {
             .hero { align-items: flex-end; }
             .hero h1 { font-size: clamp(34px, 12vw, 64px); font-stretch: 112%; }
@@ -720,10 +781,6 @@
 <header id="hdr">
     <div class="wrap nav">
         <a class="brand" href="#top">PRATEEK<b>_</b>KONDURU</a>
-        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
-            <svg class="bars" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-            <svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
-        </button>
         <nav class="nav-links" id="navLinks" aria-label="Primary">
             <a href="#about">About</a>
             <a href="#experience">Experience</a>
@@ -731,6 +788,11 @@
             <a href="#education">Education</a>
             <a class="btn btn-solid" href="#contact">Get in touch</a>
         </nav>
+        <button class="console-chip" id="palBtn" aria-label="Open console" title="Console (Ctrl/⌘ K)">&gt;_</button>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
+            <svg class="bars" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+            <svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
     </div>
 </header>
 
@@ -1107,6 +1169,19 @@
     </div>
 </footer>
 
+<div class="pal" id="pal" hidden>
+    <div class="pal-scrim" data-close></div>
+    <div class="pal-panel" role="dialog" aria-modal="true" aria-label="Site console">
+        <div class="pal-head">
+            <span class="pal-prompt" aria-hidden="true">pk&gt;</span>
+            <input id="palInput" type="text" placeholder="Type a command" aria-label="Command" autocomplete="off" autocapitalize="off" spellcheck="false" />
+            <kbd>esc</kbd>
+        </div>
+        <ul class="pal-list" id="palList" role="listbox" aria-label="Commands"></ul>
+        <div class="pal-out" id="palOut" hidden></div>
+    </div>
+</div>
+
 <script>
 (() => {
     'use strict';
@@ -1217,7 +1292,9 @@
                 vx += (dx / Math.sqrt(d2 + 1)) * f;
                 vy += (dy / Math.sqrt(d2 + 1)) * f;
             }
-            const nx = p.x + vx, ny = p.y + vy;
+            const nx = p.x + vx + (p.ix || 0), ny = p.y + vy + (p.iy || 0);
+            if (p.ix) { p.ix *= 0.88; if (Math.abs(p.ix) < 0.05) p.ix = 0; }
+            if (p.iy) { p.iy *= 0.88; if (Math.abs(p.iy) < 0.05) p.iy = 0; }
             ctx.strokeStyle = p.amber ? 'oklch(80% 0.148 72 / 0.62)' : 'oklch(93% 0.006 85 / 0.22)';
             ctx.lineWidth = p.amber ? 1.2 : 0.9;
             ctx.beginPath();
@@ -1259,11 +1336,124 @@
         }
         document.addEventListener('visibilitychange', () => document.hidden ? stop() : start());
         window.addEventListener('pointermove', e => { mouse.tx = e.clientX; mouse.ty = e.clientY; }, { passive: true });
+
+        // Click open hero space: the field detonates outward from the cursor
+        window.addEventListener('pointerdown', e => {
+            if (e.target.closest('a, button, input, .pal, header')) return;
+            const r = canvas.getBoundingClientRect();
+            if (e.clientY < r.top || e.clientY > r.bottom) return;
+            const bx = e.clientX, by = e.clientY - r.top;
+            for (const p of parts) {
+                const dx = p.x - bx, dy = p.y - by;
+                const d2 = dx * dx + dy * dy;
+                if (d2 < 48400) {                        // within 220px of the click
+                    const d = Math.sqrt(d2) + 1;
+                    const f = (1 - d / 220) * 9;
+                    p.ix = (dx / d) * f;
+                    p.iy = (dy / d) * f;
+                }
+            }
+            for (let i = 0; i < 12; i++) {               // amber sparks from the point itself
+                const a = Math.random() * Math.PI * 2;
+                const s = spawn();
+                s.x = bx; s.y = by;
+                s.amber = true;
+                s.life = 30 + Math.random() * 40;
+                s.ix = Math.cos(a) * (2.5 + Math.random() * 3);
+                s.iy = Math.sin(a) * (2.5 + Math.random() * 3);
+                parts.push(s);
+            }
+            if (parts.length > 240) parts.splice(0, parts.length - 240);
+        });
     }
     let rT;
     window.addEventListener('resize', () => {
         clearTimeout(rT);
         rT = setTimeout(() => { size(); if (reduce) staticField(); }, 150);
+    });
+
+    /* ================= Console palette (Ctrl/⌘ K) ================= */
+    const pal = document.getElementById('pal');
+    const palInput = document.getElementById('palInput');
+    const palList = document.getElementById('palList');
+    const palOut = document.getElementById('palOut');
+    const palBtn = document.getElementById('palBtn');
+    let palItems = [], palSel = 0, palPrevFocus = null;
+
+    const say = msg => { palOut.textContent = msg; palOut.hidden = false; };
+    const jump = sel => { palClose(); document.querySelector(sel).scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }); };
+    const pop = url => { palClose(); window.open(url, '_blank', 'noopener'); };
+
+    const CMDS = [
+        { n: 'about',      h: 'Who I am',                        k: 'profile bio',            run: () => jump('#about') },
+        { n: 'experience', h: 'Open the deployment log',         k: 'work history roles',     run: () => jump('#experience') },
+        { n: 'skills',     h: 'Capabilities',                    k: 'stack ai agentic',       run: () => jump('#skills') },
+        { n: 'education',  h: 'Credentials',                     k: 'degrees certifications', run: () => jump('#education') },
+        { n: 'contact',    h: 'Get in touch',                    k: 'reach hire talk',        run: () => jump('#contact') },
+        { n: 'resume',     h: 'Open Profile.pdf',                k: 'cv download résumé',     run: () => pop('Profile.pdf') },
+        { n: 'email',      h: 'pkonduru4@gmail.com',             k: 'mail write',             run: () => { palClose(); location.href = 'mailto:pkonduru4@gmail.com'; } },
+        { n: 'copy email', h: 'Copy address to clipboard',       k: 'clipboard',              run: () => navigator.clipboard.writeText('pkonduru4@gmail.com').then(() => say('pkonduru4@gmail.com copied')) },
+        { n: 'linkedin',   h: 'linkedin.com/in/prateek-konduru', k: 'social profile',         run: () => pop('https://www.linkedin.com/in/prateek-konduru/') },
+        { n: 'github',     h: 'github.com/prateekkonduru',       k: 'code repos',             run: () => pop('https://github.com/prateekkonduru') },
+        { n: 'whoami',     h: 'One-liner',                       k: 'identity',               run: () => say('Prateek Konduru. AI Solutions Leader at Ushur, San Jose, CA.') },
+        { n: 'deploy',     h: 'Ship it',                         k: 'production',             run: () => say('Already in production.') }
+    ];
+
+    function palRender(q) {
+        const s = q.trim().toLowerCase();
+        // Rank: exact command name, then name prefix, then name substring, then hint/keyword hit
+        const score = c => c.n === s ? 3 : c.n.startsWith(s) ? 2 : c.n.includes(s) ? 1 : 0;
+        palItems = CMDS.filter(c => !s || (c.n + ' ' + c.h + ' ' + c.k).toLowerCase().includes(s));
+        if (s) palItems = palItems.slice().sort((a, b) => score(b) - score(a));
+        palSel = 0;
+        palList.innerHTML = palItems.length
+            ? palItems.map((c, i) => '<li class="pal-item" id="pi-' + i + '" role="option" aria-selected="' + (i === palSel) + '"><span class="pi-name">' + c.n + '</span><span class="pi-hint">' + c.h + '</span></li>').join('')
+            : '<li class="pal-empty">no matching command</li>';
+        palInput.setAttribute('aria-activedescendant', palItems.length ? 'pi-0' : '');
+    }
+    function palMove(d) {
+        if (!palItems.length) return;
+        palSel = (palSel + d + palItems.length) % palItems.length;
+        [...palList.children].forEach((el, i) => el.setAttribute('aria-selected', String(i === palSel)));
+        palInput.setAttribute('aria-activedescendant', 'pi-' + palSel);
+        palList.children[palSel].scrollIntoView({ block: 'nearest' });
+    }
+    function palOpen() {
+        palPrevFocus = document.activeElement;
+        pal.hidden = false;
+        document.body.classList.add('pal-open');
+        palInput.value = '';
+        palOut.hidden = true;
+        palRender('');
+        palInput.focus();
+    }
+    function palClose() {
+        pal.hidden = true;
+        document.body.classList.remove('pal-open');
+        if (palPrevFocus && palPrevFocus.focus) palPrevFocus.focus();
+    }
+
+    palBtn.addEventListener('click', palOpen);
+    pal.addEventListener('click', e => { if (e.target.hasAttribute('data-close')) palClose(); });
+    palList.addEventListener('click', e => {
+        const li = e.target.closest('.pal-item');
+        if (!li) return;
+        const i = [...palList.children].indexOf(li);
+        if (palItems[i]) palItems[i].run();
+    });
+    palInput.addEventListener('input', () => { palOut.hidden = true; palRender(palInput.value); });
+    document.addEventListener('keydown', e => {
+        if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+            e.preventDefault();
+            pal.hidden ? palOpen() : palClose();
+            return;
+        }
+        if (pal.hidden) return;
+        if (e.key === 'Escape') { e.preventDefault(); palClose(); }
+        else if (e.key === 'Tab') { e.preventDefault(); palInput.focus(); }
+        else if (e.key === 'ArrowDown') { e.preventDefault(); palMove(1); }
+        else if (e.key === 'ArrowUp') { e.preventDefault(); palMove(-1); }
+        else if (e.key === 'Enter') { e.preventDefault(); if (palItems[palSel]) palItems[palSel].run(); }
     });
 })();
 </script>
