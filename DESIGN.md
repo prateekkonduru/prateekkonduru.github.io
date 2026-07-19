@@ -7,12 +7,12 @@ CSS custom properties in the `:root` block of that file.
 
 | Token | Value | Use |
 |---|---|---|
-| `--bg` | `oklch(16% 0.008 255)` | page base (cool graphite, never #000) |
-| `--bg-panel` | `oklch(17.5% 0.009 255)` | capability panels |
+| `--bg` | `oklch(11.5% 0.007 255)` | page base (cool graphite, never #000) |
+| `--bg-panel` | `oklch(13.5% 0.008 255)` | capability panels |
 | `--ink` | `oklch(93% 0.006 85)` | primary text (warm bone, never #fff) |
 | `--ink-dim` | `oklch(74% 0.008 255)` | body/secondary text |
 | `--ink-faint` | `oklch(63% 0.009 255)` | labels, dates (large/label sizes only) |
-| `--line` / `--line-soft` | `oklch(29%/24% 0.008 255)` | hairlines, borders |
+| `--line` / `--line-soft` | `oklch(26%/20.5% 0.008 255)` | hairlines, borders |
 | `--amber` | `oklch(80% 0.148 72)` | THE accent: CTAs, caret, key figures, focus rings |
 | `--amber-ink` | `oklch(20% 0.03 72)` | text on amber buttons |
 
