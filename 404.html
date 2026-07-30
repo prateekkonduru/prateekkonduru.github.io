@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>404 | Prateek Konduru</title>
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <style>
+        @font-face {
+            font-family: 'Archivo';
+            font-style: normal;
+            font-weight: 100 900;
+            font-stretch: 62% 125%;
+            font-display: swap;
+            src: url('/fonts/archivo.woff2') format('woff2');
+        }
+        @font-face {
+            font-family: 'Martian Mono';
+            font-style: normal;
+            font-weight: 100 800;
+            font-display: swap;
+            src: url('/fonts/martian-mono.woff2') format('woff2');
+        }
+        :root {
+            --bg: oklch(11.5% 0.007 255);
+            --ink: oklch(93% 0.006 85);
+            --ink-dim: oklch(74% 0.008 255);
+            --ink-faint: oklch(63% 0.009 255);
+            --line: oklch(26% 0.008 255);
+            --amber: oklch(80% 0.148 72);
+            --amber-ink: oklch(20% 0.03 72);
+            --eo: cubic-bezier(0.23, 1, 0.32, 1);
+            color-scheme: dark;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            min-height: 100dvh;
+            display: grid;
+            place-items: center;
+            background: var(--bg);
+            color: var(--ink);
+            font-family: 'Archivo', -apple-system, 'Helvetica Neue', sans-serif;
+            padding: 24px;
+        }
+        .box { max-width: 560px; }
+        .code {
+            font-family: 'Martian Mono', ui-monospace, monospace;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--amber);
+            margin-bottom: 20px;
+        }
+        h1 {
+            font-stretch: 118%;
+            font-weight: 800;
+            font-size: clamp(38px, 7vw, 62px);
+            line-height: 0.98;
+            letter-spacing: -0.03em;
+            text-transform: uppercase;
+            margin-bottom: 22px;
+        }
+        .nb { white-space: nowrap; }
+        .caret {
+            display: inline-block;
+            width: 0.14em; height: 0.82em;
+            margin-left: 0.06em;
+            background: var(--amber);
+            transform: translateY(0.08em);
+            animation: blink 1.15s steps(2, start) infinite;
+        }
+        @keyframes blink { to { visibility: hidden; } }
+        @media (prefers-reduced-motion: reduce) { .caret { animation: none; } }
+        p { color: var(--ink-dim); line-height: 1.65; margin-bottom: 32px; max-width: 44ch; }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            min-height: 46px;
+            padding: 0 22px;
+            border-radius: 4px;
+            background: var(--amber);
+            color: var(--amber-ink);
+            font-size: 14.5px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.16s var(--eo);
+        }
+        .btn:active { transform: scale(0.97); }
+        :focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <p class="code">Error 404</p>
+        <h1>Route not <span class="nb">deployed<span class="caret" aria-hidden="true"></span></span></h1>
+        <p>This path never made it past discovery. The production build lives at the root.</p>
+        <a class="btn" href="/">Back to the record</a>
+    </div>
+</body>
+</html>

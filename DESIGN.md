@@ -1,6 +1,6 @@
 # DESIGN.md
 
-Design system for the live site (`dist/index.html`). Everything is defined as
+Design system for the live site (`index.html` at the repo root). Everything is defined as
 CSS custom properties in the `:root` block of that file.
 
 ## Color (OKLCH, dark theme locked)

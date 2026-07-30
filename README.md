@@ -7,6 +7,8 @@ Live at: https://prateekkonduru.github.io
 ## Structure
 
 - `index.html` - the live single-file portfolio ("deployment record" design), served at the root
+- `404.html` - custom not-found page ("route not deployed")
+- `fonts/` - self-hosted variable fonts (Archivo, Martian Mono); the site makes zero external requests
 - `Profile.pdf` - résumé download
 - `og.png` - social share card (1200x630), regenerate from the hero if the design changes
 - `favicon.png` / `favicon.ico` / `apple-touch-icon.png` - the "PK + caret" brand mark (regenerate from a 512px tile if the brand changes)
@@ -20,7 +22,8 @@ The site is an "engineered ops console" take on a portfolio, built around the
 forward-deployed identity:
 
 - Graphite monochrome base (OKLCH) with a single signal-amber accent
-- Archivo variable font (width axis: expanded display voice, normal body voice) + Martian Mono for data labels
+- Archivo variable font (width axis: expanded display voice, normal body voice) + Martian Mono for data labels, both self-hosted from `fonts/`
+- Printing the page yields a light-theme paper résumé (interactive chrome removed, link URLs spelled out)
 - A generative canvas flow field as the hero imagery (no stock photos)
 - Sticky company rail + promotion ladder in the experience "deployment log"
 - IntersectionObserver reveals, gated behind an `html.js` class so the page is
