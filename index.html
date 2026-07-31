@@ -35,7 +35,7 @@
                 "@id": "https://prateekkonduru.github.io/#profilepage",
                 "url": "https://prateekkonduru.github.io/",
                 "name": "Prateek Konduru | AI Solutions Leader",
-                "dateModified": "2026-07-29",
+                "dateModified": "2026-07-31",
                 "mainEntity": { "@id": "https://prateekkonduru.github.io/#person" },
                 "isPartOf": { "@id": "https://prateekkonduru.github.io/#website" }
             },
@@ -1057,7 +1057,7 @@
         </div>
 
         <div class="early rv">
-            <span class="label">Internships &amp; early work</span>
+            <h3 class="label">Internships &amp; early work</h3>
             <div class="early-grid">
                 <div class="eg">
                     <h4 class="eg-role">Software Engineer, R&amp;D Intern</h4>
@@ -1477,6 +1477,9 @@
     const palOut = document.getElementById('palOut');
     const palBtn = document.getElementById('palBtn');
     let palItems = [], palSel = 0, palPrevFocus = null;
+    // Everything behind the dialog goes inert while it's open, so the page
+    // isn't reachable by tab order or a screen reader's virtual cursor
+    const palBehind = [document.querySelector('.skip'), hdr, document.getElementById('main'), document.querySelector('footer')].filter(Boolean);
 
     const say = msg => { palOut.textContent = msg; palOut.hidden = false; };
     const jump = sel => { palClose(); document.querySelector(sel).scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }); };
@@ -1522,6 +1525,7 @@
         palPrevFocus = document.activeElement;
         pal.hidden = false;
         document.body.classList.add('pal-open');
+        palBehind.forEach(el => el.setAttribute('inert', ''));
         palInput.value = '';
         palOut.hidden = true;
         palRender('');
@@ -1530,6 +1534,8 @@
     function palClose() {
         pal.hidden = true;
         document.body.classList.remove('pal-open');
+        // clear inert before restoring focus, or the target can't take it
+        palBehind.forEach(el => el.removeAttribute('inert'));
         if (palPrevFocus && palPrevFocus.focus) palPrevFocus.focus();
     }
 
