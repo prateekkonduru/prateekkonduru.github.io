@@ -9,12 +9,21 @@ CSS custom properties in the `:root` block of that file.
 |---|---|---|
 | `--bg` | `oklch(11.5% 0.007 255)` | page base (cool graphite, never #000) |
 | `--bg-panel` | `oklch(13.5% 0.008 255)` | capability panels |
+| `--bg-raise` | `oklch(14.5% 0.008 255)` | the one lifted surface: console palette panel |
 | `--ink` | `oklch(93% 0.006 85)` | primary text (warm bone, never #fff) |
 | `--ink-dim` | `oklch(74% 0.008 255)` | body/secondary text |
 | `--ink-faint` | `oklch(63% 0.009 255)` | labels, dates (large/label sizes only) |
 | `--line` / `--line-soft` | `oklch(26%/20.5% 0.008 255)` | hairlines, borders |
 | `--amber` | `oklch(80% 0.148 72)` | THE accent: CTAs, caret, key figures, focus rings |
+| `--amber-hot` | `oklch(85% 0.152 78)` | amber button hover only |
 | `--amber-ink` | `oklch(20% 0.03 72)` | text on amber buttons |
+| `--amber-wash` | `oklch(80% 0.148 72 / 0.07)` | AI/ML panel tint, selected console row |
+
+Those are the tokens. The CSS also carries inline `oklch()` literals, but only as
+alpha variants of these same three hues (bone `93% 0.006 85`, amber `80% 0.148 72`,
+graphite `255`), plus two darker values used solely for the console scrim and its
+shadow. If a surface seems to need a new value, reach for an existing token or an
+alpha of one; a new hue is almost always the wrong answer.
 
 Strategy: monochrome graphite surface + one signal accent. Do not add a second
 accent color. Amber marks instrument moments only (status, numbers, current
@@ -27,6 +36,10 @@ role, primary CTA).
   - Body: normal width, 400/600
 - **Martian Mono** 400-600: dates, chips, labels (11-12.5px, letter-spacing 0.08-0.14em, uppercase)
 - Emphasis inside a headline: weight/width of the same family, never a second family
+- Both families are **self-hosted** from `fonts/` as variable woff2, declared in
+  `@font-face` with `font-display: swap` and preloaded. The page makes zero external
+  requests: do not reintroduce a Google Fonts `<link>`. To change a weight or width,
+  adjust the axis in CSS rather than fetching another file
 
 ## Shape and space
 
@@ -53,7 +66,7 @@ no fake product screenshots.
 ## Hard rules
 
 - Zero em/en-dashes in visible text (hyphens only)
-- Max one middle-dot per metadata line (currently zero)
+- Middle-dots only as the hero pill's two domain separators; never in prose or metadata lines
 - One decorative-adjacent dot on the whole page: the hero status pulse (fronting the domain strip "AI Leadership / Agentic Systems / Enterprise AI"; all three segments always show, wrapping into tidy rows inside the pill on narrow screens)
 - No gradient text, no glassmorphism, no side-stripe borders, no stat-card strips
 - Contrast: body text >= 4.5:1, labels >= 4.5:1 at their size, amber-on-graphite CTAs ~8:1

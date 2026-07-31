@@ -41,6 +41,7 @@ light mode by design).
 ## Strategic principles
 
 - Content and IA are stable: anchors #about, #experience, #skills, #education, #contact are load-bearing (nav, SEO)
-- Résumé facts must match dist/Profile.pdf; update both together
+- Résumé facts must match `Profile.pdf` at the repo root, which is the copy the site
+  serves; `dist/Profile.pdf` is a legacy duplicate for old deep links. Update both together
 - One contact intent, one label: "Get in touch"
 - Everything must survive JS-off, print, and prefers-reduced-motion
