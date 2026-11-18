@@ -73,7 +73,7 @@ no fake product screenshots.
 ## Hard rules
 
 - Zero em/en-dashes in visible text (hyphens only)
-- Middle-dots only as the hero pill's two domain separators; never in prose or metadata lines
-- One decorative-adjacent dot on the whole page: the hero status pulse (fronting the domain strip "AI Leadership / Agentic Systems / Enterprise AI"; all three segments always show, wrapping into tidy rows inside the pill on narrow screens)
+- Middle-dots only as the hero pill's three domain separators; never in prose or metadata lines
+- One decorative-adjacent dot on the whole page: the hero status pulse (fronting the domain strip "Forward Deployed Engineering / Agentic AI / Solutions Architecture / Enterprise Systems"; all four segments always show, wrapping into tidy rows inside the pill on narrow screens)
 - No gradient text, no glassmorphism, no side-stripe borders, no stat-card strips
 - Contrast: body text >= 4.5:1, labels >= 4.5:1 at their size, amber-on-graphite CTAs ~8:1
