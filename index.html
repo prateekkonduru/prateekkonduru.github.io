@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Prateek Konduru is an AI Solutions Leader running forward-deployed engineering at Ushur: agentic AI, LLMs, and RAG systems shipped into Fortune 500 production." />
     <meta name="author" content="Prateek Konduru" />
-    <meta property="og:title" content="Prateek Konduru | AI Solutions Leader" />
+    <meta property="og:title" content="Prateek Konduru | Leading AI from discovery to deployment" />
     <meta property="og:description" content="Forward-deployed AI engineering. Agentic AI, LLMs, and RAG systems shipped into Fortune 500 production." />
     <meta property="og:type" content="profile" />
     <meta property="og:url" content="https://prateekkonduru.github.io/" />
@@ -15,11 +15,11 @@
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Prateek Konduru, AI Solutions Leader" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Prateek Konduru | AI Solutions Leader" />
+    <meta name="twitter:title" content="Prateek Konduru | Leading AI from discovery to deployment" />
     <meta name="twitter:description" content="Forward-deployed AI engineering. Agentic AI, LLMs, and RAG systems shipped into Fortune 500 production." />
     <meta name="twitter:image" content="https://prateekkonduru.github.io/og.png" />
     <meta name="theme-color" content="#0b0d10" />
-    <title>Prateek Konduru | AI Solutions Leader</title>
+    <title>Prateek Konduru | Leading AI from discovery to deployment</title>
     <link rel="canonical" href="https://prateekkonduru.github.io/" />
     <script>document.documentElement.classList.add('js');</script>
     <link rel="icon" href="favicon.png" type="image/png" />
@@ -34,8 +34,8 @@
                 "@type": "ProfilePage",
                 "@id": "https://prateekkonduru.github.io/#profilepage",
                 "url": "https://prateekkonduru.github.io/",
-                "name": "Prateek Konduru | AI Solutions Leader",
-                "dateModified": "2026-07-31",
+                "name": "Prateek Konduru | Leading AI from discovery to deployment",
+                "dateModified": "2026-11-18",
                 "mainEntity": { "@id": "https://prateekkonduru.github.io/#person" },
                 "isPartOf": { "@id": "https://prateekkonduru.github.io/#website" }
             },
@@ -63,11 +63,11 @@
                 "url": "https://prateekkonduru.github.io/",
                 "knowsAbout": [
                     "Agentic AI",
-                    "Multi-Agent Systems",
+                    "Prompt Engineering",
                     "Generative AI",
                     "Large Language Models",
                     "Retrieval-Augmented Generation",
-                    "Model Context Protocol",
+                    "LLM Fine-Tuning",
                     "Forward Deployed Engineering",
                     "Solution Architecture",
                     "Enterprise SaaS Implementation",
@@ -112,7 +112,7 @@
             font-family: 'Martian Mono';
             font-style: normal;
             font-weight: 100 800;
-            font-display: swap;
+            font-display: optional;  /* labels only: never swap late, so the pill can't reflow the hero (CLS) */
             src: url('fonts/martian-mono.woff2') format('woff2');
             unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
         }
@@ -201,6 +201,12 @@
             transition-delay: var(--d, 0ms);
         }
         html.js .rv.in { opacity: 1; translate: 0 0; }
+        /* The hero sits above the fold and holds the LCP text, so it is visible
+           from the first paint and only settles with a short rise. A late fade
+           made mobile LCP wait ~0.5s for its own animation. Transforms never
+           count as layout shift. */
+        html.js .hero .rv { opacity: 1; translate: 0 10px; transition: translate 0.6s var(--eo); transition-delay: var(--d, 0ms); }
+        html.js .hero .rv.in { translate: 0 0; }
 
         /* Hero line masks: lines rise into place on load */
         .mask { overflow: hidden; display: block; }
@@ -214,7 +220,7 @@
 
         @media (prefers-reduced-motion: reduce) {
             html { scroll-behavior: auto; }
-            html.js .rv { opacity: 1; translate: 0 0; transition: none; }
+            html.js .rv, html.js .hero .rv { opacity: 1; translate: 0 0; transition: none; }
             html.js .mask > span { transform: none; transition: none; }
             html.js .ladder::before { transform: scaleY(1); transition: none; }
             .caret { animation: none !important; }
@@ -749,6 +755,12 @@
         .console-chip:hover { color: var(--amber); border-color: var(--ink-faint); }
         .nav-links { margin-left: auto; }
         @media (max-width: 860px) { .console-chip { margin-left: auto; } }
+        /* Desktop shows the shortcut so the console gets found; touch and narrow screens keep the square chip */
+        .chip-kbd { display: none; font-family: var(--mono); font-size: 10px; font-weight: 500; color: var(--ink-faint); border: 1px solid var(--line); border-radius: 3px; padding: 2px 5px; line-height: 1.2; }
+        @media (min-width: 861px) and (pointer: fine) {
+            .console-chip { width: auto; padding: 0 10px 0 13px; gap: 9px; }
+            .chip-kbd { display: inline-block; }
+        }
 
         body.pal-open { overflow: hidden; }
         .pal { position: fixed; inset: 0; z-index: 200; display: grid; place-items: start center; padding: min(16vh, 150px) 16px 0; }
@@ -818,7 +830,7 @@
             }
             @page { margin: 14mm; }
             html { scroll-padding-top: 0; }
-            html.js .rv, html.js .mask > span { opacity: 1; translate: 0 0; transform: none; transition: none; }
+            html.js .rv, html.js .hero .rv, html.js .mask > span { opacity: 1; translate: 0 0; transform: none; transition: none; }
             html.js .ladder::before { transform: scaleY(1); }
             body { background: #ffffff; color: var(--ink); font-size: 11pt; line-height: 1.5; }
             header, #field, .pal, .skip, .hero-cta, .caret, .pulse, footer { display: none !important; }
@@ -877,7 +889,7 @@
             <a href="#education">Education</a>
             <a class="btn btn-solid" href="#contact">Get in touch</a>
         </nav>
-        <button class="console-chip" id="palBtn" aria-label="Open console" title="Console (Ctrl/⌘ K)">&gt;_</button>
+        <button class="console-chip" id="palBtn" aria-label="Open console" title="Console (Ctrl/⌘ K)">&gt;_<kbd class="chip-kbd" aria-hidden="true">⌘K</kbd></button>
         <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
             <svg class="bars" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
             <svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
@@ -923,8 +935,8 @@
                     healthcare, and financial services enterprises.
                 </p>
                 <p>
-                    The work now centers on agentic systems (multi-agent workflows, tool-calling
-                    LLMs, RAG pipelines) plus the enterprise wiring around them: security
+                    The work now centers on agentic systems (agentic workflows, LLM-powered
+                    agents, RAG pipelines) plus the enterprise wiring around them: security
                     reviews, integrations, governance, and the stakeholder management that gets
                     systems <strong>adopted</strong>, not just launched.
                 </p>
@@ -965,7 +977,7 @@
                     <div class="role now">
                         <div class="role-head">
                             <h4 class="role-title">Manager, AI Solution Acceleration &amp; Forward Deployment</h4>
-                            <span class="role-when">Dec 2025 - Present</span>
+                            <span class="role-when">Jan 2026 - Present</span>
                         </div>
                         <ul>
                             <li>Lead forward-deployed engagements for Ushur's flagship enterprise customers, operationalizing agentic AI, LLMs, and Generative AI workflows across insurance, healthcare, and financial services.</li>
@@ -977,7 +989,7 @@
                     <div class="role">
                         <div class="role-head">
                             <h4 class="role-title">Senior Technical Consultant</h4>
-                            <span class="role-when">Apr 2025 - Dec 2025</span>
+                            <span class="role-when">Apr 2025 - Jan 2026</span>
                         </div>
                         <ul>
                             <li>Owned end-to-end delivery for mid-market and enterprise accounts, from discovery and technical design to build and go-live, cutting onboarding time 30% with <strong>98% CSAT</strong>.</li>
@@ -997,7 +1009,7 @@
                     </div>
                     <div class="role">
                         <div class="role-head">
-                            <h4 class="role-title">Associate Technical Consultant</h4>
+                            <h4 class="role-title">Associate Solutions Consultant</h4>
                             <span class="role-when">Oct 2023 - Jun 2024</span>
                         </div>
                         <ul>
@@ -1101,23 +1113,16 @@
                 <h3>AI / ML</h3>
                 <p class="cap-line">Current focus: agentic systems in enterprise production.</p>
                 <div class="chips">
+                    <span class="chip">Generative AI</span>
+                    <span class="chip">LLMs</span>
                     <span class="chip">Agentic AI</span>
-                    <span class="chip">Multi-Agent Systems</span>
-                    <span class="chip">MCP</span>
-                    <span class="chip">A2A Protocol</span>
-                    <span class="chip">Tool Calling</span>
-                    <span class="chip">Computer Use</span>
-                    <span class="chip">LangGraph</span>
-                    <span class="chip">LangChain</span>
-                    <span class="chip">LangSmith</span>
                     <span class="chip">RAG</span>
                     <span class="chip">Prompt Engineering</span>
-                    <span class="chip">Fine-Tuning</span>
-                    <span class="chip">LLM Evals</span>
-                    <span class="chip">Guardrails</span>
-                    <span class="chip">Claude / GPT / Gemini</span>
-                    <span class="chip">Vector DBs</span>
-                    <span class="chip">LLMOps</span>
+                    <span class="chip">LLM Fine-Tuning</span>
+                    <span class="chip">OpenAI</span>
+                    <span class="chip">Anthropic Claude</span>
+                    <span class="chip">Vector Databases</span>
+                    <span class="chip">MLOps</span>
                 </div>
             </div>
             <div class="cap cap-b rv" style="--d:90ms">
@@ -1129,8 +1134,10 @@
                     <span class="chip">Pre- &amp; Post-Sales</span>
                     <span class="chip">Customer Success</span>
                     <span class="chip">Agile / Scrum</span>
+                    <span class="chip">Cross-Functional Leadership</span>
                     <span class="chip">Stakeholder Mgmt</span>
-                    <span class="chip">Technical PM</span>
+                    <span class="chip">Technical Program Mgmt</span>
+                    <span class="chip">Enterprise SaaS</span>
                     <span class="chip">Mentorship</span>
                 </div>
             </div>
@@ -1139,22 +1146,19 @@
                 <p class="cap-line">The stack under the AI layer.</p>
                 <div class="chips">
                     <span class="chip">Python</span>
-                    <span class="chip">TypeScript</span>
                     <span class="chip">JavaScript</span>
+                    <span class="chip">TypeScript</span>
                     <span class="chip">SQL</span>
-                    <span class="chip">React</span>
                     <span class="chip">Next.js</span>
                     <span class="chip">Node.js</span>
-                    <span class="chip">FastAPI</span>
                     <span class="chip">REST APIs</span>
                     <span class="chip">Microservices</span>
                     <span class="chip">System Design</span>
                     <span class="chip">CI/CD</span>
                     <span class="chip">Docker</span>
-                    <span class="chip">Kubernetes</span>
                     <span class="chip">Terraform</span>
                     <span class="chip">PostgreSQL</span>
-                    <span class="chip">MongoDB</span>
+                    <span class="chip">Supabase</span>
                 </div>
             </div>
             <div class="cap cap-d rv" style="--d:90ms">
@@ -1166,8 +1170,10 @@
                     <span class="chip">Oracle Cloud</span>
                     <span class="chip">Salesforce</span>
                     <span class="chip">Ushur</span>
-                    <span class="chip">Snowflake</span>
-                    <span class="chip">Datadog</span>
+                    <span class="chip">Twilio</span>
+                    <span class="chip">Sentry</span>
+                    <span class="chip">PostHog</span>
+                    <span class="chip">JIRA</span>
                     <span class="chip">Git / GitHub</span>
                     <span class="chip">Linux</span>
                 </div>
@@ -1324,151 +1330,187 @@
         document.querySelectorAll('.rv, .ladder').forEach(el => el.classList.add('in'));
     }
 
+    /* ================= Analytics (off until a GoatCounter code is set) =================
+       Cookieless and privacy-friendly. While GOATCOUNTER is empty nothing loads,
+       no request leaves the page, and track() is a no-op. */
+    const GOATCOUNTER = '';   // e.g. 'prateekkonduru' for https://prateekkonduru.goatcounter.com
+    const track = name => { try { if (GOATCOUNTER && window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: name, title: name, event: true }); } catch (_) {} };
+
+    // Warm the résumé the moment a visitor shows intent (hover, focus, touch), so the
+    // main CTA opens instantly without making every visitor download 115KB up front
+    let pdfWarm = false;
+    const warmPdf = () => {
+        if (pdfWarm || (navigator.connection && navigator.connection.saveData)) return;
+        pdfWarm = true;
+        const l = document.createElement('link');
+        l.rel = 'prefetch'; l.href = 'Profile.pdf';
+        document.head.appendChild(l);
+    };
+    document.querySelectorAll('a[href="Profile.pdf"]').forEach(a =>
+        ['pointerenter', 'focus', 'touchstart'].forEach(ev => a.addEventListener(ev, warmPdf, { passive: true, once: true })));
+
     /* ================= Signal field =================
-       Particles drift along a pseudo-noise flow field and leave
-       fading telemetry streaks. The one piece of imagery on the
-       page, and it is generated, not stocked. */
+       Particles drift along a pseudo-noise flow field and leave fading telemetry
+       streaks. The one piece of imagery on the page, and it is generated, not stocked.
+       It starts after the first paint so it never blocks the page's first style and
+       layout pass, and runs inside try/catch: if canvas is blocked or out of memory,
+       the page and the console keep working without it. */
     const canvas = document.getElementById('field');
-    const ctx = canvas.getContext('2d', { alpha: false });
-    const BG = getComputedStyle(document.body).backgroundColor;
-    let W = 0, H = 0, dpr = 1, parts = [], raf = 0, running = false;
-    const mouse = { x: -1e4, y: -1e4, tx: -1e4, ty: -1e4 };
+    const FIELD_BG = 'oklch(11.5% 0.007 255)';   // = --bg token; hard-coded so no style read is needed
+    const BONE = 'oklch(93% 0.006 85 / 0.22)', AMBER = 'oklch(80% 0.148 72 / 0.62)';
+    const STEP = 1000 / 60;                      // motion is tuned per 60fps frame; dt rescales it for 90/120Hz screens
 
-    function size() {
-        dpr = Math.min(window.devicePixelRatio || 1, 2);
-        W = canvas.clientWidth; H = canvas.clientHeight;
-        canvas.width = Math.round(W * dpr);
-        canvas.height = Math.round(H * dpr);
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        ctx.fillStyle = BG;
-        ctx.fillRect(0, 0, W, H);
-        const n = Math.max(60, Math.min(170, Math.round((W * H) / 11000)));
-        parts = Array.from({ length: n }, spawn);
-    }
+    function initField() {
+        const ctx = canvas.getContext('2d', { alpha: false });
+        if (!ctx) return;
+        let W = 0, H = 0, dpr = 1, parts = [], raf = 0, running = false, last = 0;
+        const mouse = { x: -1e4, y: -1e4, tx: -1e4, ty: -1e4 };
 
-    function spawn() {
-        return {
-            x: Math.random() * W,
-            y: Math.random() * H,
-            v: 0.35 + Math.random() * 0.75,
-            amber: Math.random() < 0.09,
-            life: 120 + Math.random() * 320
-        };
-    }
-
-    // Layered trig field: cheap, stable, organic
-    function angle(x, y, t) {
-        return Math.sin(x * 0.0021 + t * 0.00016) * 1.9
-             + Math.cos(y * 0.0017 - t * 0.00011) * 1.6
-             + Math.sin((x + y) * 0.0009 + t * 0.00007);
-    }
-
-    function frame(t) {
-        raf = requestAnimationFrame(frame);
-        // Fade previous frame toward bg: streaks, not dots
-        ctx.globalAlpha = 0.075;
-        ctx.fillStyle = BG;
-        ctx.fillRect(0, 0, W, H);
-        ctx.globalAlpha = 1;
-
-        mouse.x += (mouse.tx - mouse.x) * 0.06;
-        mouse.y += (mouse.ty - mouse.y) * 0.06;
-
-        for (const p of parts) {
-            const a = angle(p.x, p.y, t);
-            let vx = Math.cos(a) * p.v;
-            let vy = Math.sin(a) * p.v;
-            const dx = p.x - mouse.x, dy = p.y - mouse.y;
-            const d2 = dx * dx + dy * dy;
-            if (d2 < 22500) {                    // gentle push within 150px of pointer
-                const f = (1 - d2 / 22500) * 1.4;
-                vx += (dx / Math.sqrt(d2 + 1)) * f;
-                vy += (dy / Math.sqrt(d2 + 1)) * f;
-            }
-            const nx = p.x + vx + (p.ix || 0), ny = p.y + vy + (p.iy || 0);
-            if (p.ix) { p.ix *= 0.88; if (Math.abs(p.ix) < 0.05) p.ix = 0; }
-            if (p.iy) { p.iy *= 0.88; if (Math.abs(p.iy) < 0.05) p.iy = 0; }
-            ctx.strokeStyle = p.amber ? 'oklch(80% 0.148 72 / 0.62)' : 'oklch(93% 0.006 85 / 0.22)';
-            ctx.lineWidth = p.amber ? 1.2 : 0.9;
-            ctx.beginPath();
-            ctx.moveTo(p.x, p.y);
-            ctx.lineTo(nx, ny);
-            ctx.stroke();
-            p.x = nx; p.y = ny;
-            if (--p.life < 0 || p.x < -20 || p.x > W + 20 || p.y < -20 || p.y > H + 20) {
-                Object.assign(p, spawn());
-            }
+        function spawn() {
+            return {
+                x: Math.random() * W,
+                y: Math.random() * H,
+                v: 0.35 + Math.random() * 0.75,
+                amber: Math.random() < 0.09,
+                life: 120 + Math.random() * 320
+            };
         }
-    }
 
-    function staticField() {
-        // Reduced motion: one quiet, pre-drawn state
-        ctx.fillStyle = BG;
-        ctx.fillRect(0, 0, W, H);
-        for (const p of parts) {
-            const a = angle(p.x, p.y, 0);
-            ctx.strokeStyle = p.amber ? 'oklch(80% 0.148 72 / 0.55)' : 'oklch(93% 0.006 85 / 0.2)';
-            ctx.lineWidth = p.amber ? 1.1 : 0.8;
-            ctx.beginPath();
-            ctx.moveTo(p.x, p.y);
-            ctx.lineTo(p.x + Math.cos(a) * 14, p.y + Math.sin(a) * 14);
-            ctx.stroke();
+        function size() {
+            dpr = Math.min(window.devicePixelRatio || 1, 2);
+            W = canvas.clientWidth; H = canvas.clientHeight;
+            canvas.width = Math.round(W * dpr);
+            canvas.height = Math.round(H * dpr);
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            ctx.fillStyle = FIELD_BG;
+            ctx.fillRect(0, 0, W, H);
+            const n = Math.max(60, Math.min(170, Math.round((W * H) / 11000)));
+            parts = Array.from({ length: n }, spawn);
         }
-    }
 
-    function start() { if (!running && !reduce) { running = true; raf = requestAnimationFrame(frame); } }
-    function stop() { running = false; cancelAnimationFrame(raf); }
-
-    size();
-    if (reduce) { staticField(); }
-    else {
-        start();
-        // Run only while the hero is on screen and the tab is visible
-        if (hasIO) {
-            new IntersectionObserver(([e]) => e.isIntersecting ? start() : stop(), { threshold: 0 }).observe(canvas);
+        // Layered trig field: cheap, stable, organic
+        function angle(x, y, t) {
+            return Math.sin(x * 0.0021 + t * 0.00016) * 1.9
+                 + Math.cos(y * 0.0017 - t * 0.00011) * 1.6
+                 + Math.sin((x + y) * 0.0009 + t * 0.00007);
         }
-        document.addEventListener('visibilitychange', () => document.hidden ? stop() : start());
-        window.addEventListener('pointermove', e => {
-            // canvas-space coords: the hero scrolls, the influence point must follow
-            const r = canvas.getBoundingClientRect();
-            mouse.tx = e.clientX - r.left;
-            mouse.ty = e.clientY - r.top;
-        }, { passive: true });
 
-        // Click open hero space: the field detonates outward from the cursor
-        window.addEventListener('pointerdown', e => {
-            if (e.target.closest('a, button, input, .pal, header')) return;
-            const r = canvas.getBoundingClientRect();
-            if (e.clientY < r.top || e.clientY > r.bottom) return;
-            const bx = e.clientX, by = e.clientY - r.top;
+        function frame(t) {
+            raf = requestAnimationFrame(frame);
+            // dt = frames elapsed at 60fps; capped so a stalled tab can't teleport particles
+            const dt = last ? Math.min((t - last) / STEP, 3) : 1;
+            last = t;
+            // Fade previous frame toward bg: streaks, not dots (same trail length at any refresh rate)
+            ctx.globalAlpha = 1 - Math.pow(1 - 0.075, dt);
+            ctx.fillStyle = FIELD_BG;
+            ctx.fillRect(0, 0, W, H);
+            ctx.globalAlpha = 1;
+
+            const ease = 1 - Math.pow(1 - 0.06, dt), decay = Math.pow(0.88, dt);
+            mouse.x += (mouse.tx - mouse.x) * ease;
+            mouse.y += (mouse.ty - mouse.y) * ease;
+
+            // Two batched paths: 2 draw calls per frame instead of one per particle
+            const bone = new Path2D(), amber = new Path2D();
             for (const p of parts) {
-                const dx = p.x - bx, dy = p.y - by;
+                const a = angle(p.x, p.y, t);
+                let vx = Math.cos(a) * p.v;
+                let vy = Math.sin(a) * p.v;
+                const dx = p.x - mouse.x, dy = p.y - mouse.y;
                 const d2 = dx * dx + dy * dy;
-                if (d2 < 48400) {                        // within 220px of the click
-                    const d = Math.sqrt(d2) + 1;
-                    const f = (1 - d / 220) * 9;
-                    p.ix = (dx / d) * f;
-                    p.iy = (dy / d) * f;
+                if (d2 < 22500) {                    // gentle push within 150px of pointer
+                    const f = (1 - d2 / 22500) * 1.4;
+                    vx += (dx / Math.sqrt(d2 + 1)) * f;
+                    vy += (dy / Math.sqrt(d2 + 1)) * f;
+                }
+                const nx = p.x + (vx + (p.ix || 0)) * dt, ny = p.y + (vy + (p.iy || 0)) * dt;
+                if (p.ix) { p.ix *= decay; if (Math.abs(p.ix) < 0.05) p.ix = 0; }
+                if (p.iy) { p.iy *= decay; if (Math.abs(p.iy) < 0.05) p.iy = 0; }
+                const path = p.amber ? amber : bone;
+                path.moveTo(p.x, p.y);
+                path.lineTo(nx, ny);
+                p.x = nx; p.y = ny;
+                p.life -= dt;
+                if (p.life < 0 || p.x < -20 || p.x > W + 20 || p.y < -20 || p.y > H + 20) {
+                    Object.assign(p, spawn());
                 }
             }
-            for (let i = 0; i < 12; i++) {               // amber sparks from the point itself
-                const a = Math.random() * Math.PI * 2;
-                const s = spawn();
-                s.x = bx; s.y = by;
-                s.amber = true;
-                s.life = 30 + Math.random() * 40;
-                s.ix = Math.cos(a) * (2.5 + Math.random() * 3);
-                s.iy = Math.sin(a) * (2.5 + Math.random() * 3);
-                parts.push(s);
+            ctx.lineWidth = 0.9; ctx.strokeStyle = BONE; ctx.stroke(bone);
+            ctx.lineWidth = 1.2; ctx.strokeStyle = AMBER; ctx.stroke(amber);
+        }
+
+        function staticField() {
+            // Reduced motion: one quiet, pre-drawn state
+            ctx.fillStyle = FIELD_BG;
+            ctx.fillRect(0, 0, W, H);
+            const bone = new Path2D(), amber = new Path2D();
+            for (const p of parts) {
+                const a = angle(p.x, p.y, 0), path = p.amber ? amber : bone;
+                path.moveTo(p.x, p.y);
+                path.lineTo(p.x + Math.cos(a) * 14, p.y + Math.sin(a) * 14);
             }
-            if (parts.length > 240) parts.splice(0, parts.length - 240);
+            ctx.lineWidth = 0.8; ctx.strokeStyle = 'oklch(93% 0.006 85 / 0.2)'; ctx.stroke(bone);
+            ctx.lineWidth = 1.1; ctx.strokeStyle = 'oklch(80% 0.148 72 / 0.55)'; ctx.stroke(amber);
+        }
+
+        function start() { if (!running && !reduce) { running = true; last = 0; raf = requestAnimationFrame(frame); } }
+        function stop() { running = false; cancelAnimationFrame(raf); }
+
+        size();
+        if (reduce) { staticField(); }
+        else {
+            start();
+            // Run only while the hero is on screen and the tab is visible
+            if (hasIO) {
+                new IntersectionObserver(([e]) => e.isIntersecting ? start() : stop(), { threshold: 0 }).observe(canvas);
+            }
+            document.addEventListener('visibilitychange', () => document.hidden ? stop() : start());
+            window.addEventListener('pointermove', e => {
+                // canvas-space coords: the hero scrolls, the influence point must follow
+                const r = canvas.getBoundingClientRect();
+                mouse.tx = e.clientX - r.left;
+                mouse.ty = e.clientY - r.top;
+            }, { passive: true });
+
+            // Click open hero space: the field detonates outward from the cursor
+            window.addEventListener('pointerdown', e => {
+                if (e.target.closest('a, button, input, .pal, header')) return;
+                const r = canvas.getBoundingClientRect();
+                if (e.clientY < r.top || e.clientY > r.bottom) return;
+                const bx = e.clientX - r.left, by = e.clientY - r.top;
+                for (const p of parts) {
+                    const dx = p.x - bx, dy = p.y - by;
+                    const d2 = dx * dx + dy * dy;
+                    if (d2 < 48400) {                        // within 220px of the click
+                        const d = Math.sqrt(d2) + 1;
+                        const f = (1 - d / 220) * 9;
+                        p.ix = (dx / d) * f;
+                        p.iy = (dy / d) * f;
+                    }
+                }
+                for (let i = 0; i < 12; i++) {               // amber sparks from the point itself
+                    const a = Math.random() * Math.PI * 2;
+                    const s = spawn();
+                    s.x = bx; s.y = by;
+                    s.amber = true;
+                    s.life = 30 + Math.random() * 40;
+                    s.ix = Math.cos(a) * (2.5 + Math.random() * 3);
+                    s.iy = Math.sin(a) * (2.5 + Math.random() * 3);
+                    parts.push(s);
+                }
+                if (parts.length > 240) parts.splice(0, parts.length - 240);
+            });
+        }
+        let rT;
+        window.addEventListener('resize', () => {
+            clearTimeout(rT);
+            rT = setTimeout(() => { size(); if (reduce) staticField(); }, 150);
         });
     }
-    let rT;
-    window.addEventListener('resize', () => {
-        clearTimeout(rT);
-        rT = setTimeout(() => { size(); if (reduce) staticField(); }, 150);
-    });
+    // After the first frame has painted: rAF lands before it, setTimeout after it
+    requestAnimationFrame(() => setTimeout(() => {
+        try { initField(); } catch (_) { /* decorative only: everything else works without it */ }
+    }, 0));
 
     /* ================= Console palette (Ctrl/⌘ K) ================= */
     const pal = document.getElementById('pal');
@@ -1481,37 +1523,106 @@
     // isn't reachable by tab order or a screen reader's virtual cursor
     const palBehind = [document.querySelector('.skip'), hdr, document.getElementById('main'), document.querySelector('footer')].filter(Boolean);
 
+    // Show the shortcut on the chip in the visitor's own platform notation
+    const chipKbd = palBtn.querySelector('.chip-kbd');
+    if (chipKbd && !/Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent)) chipKbd.textContent = 'Ctrl K';
+
     const say = msg => { palOut.textContent = msg; palOut.hidden = false; };
     const jump = sel => { palClose(); document.querySelector(sel).scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }); };
     const pop = url => { palClose(); window.open(url, '_blank', 'noopener'); };
+    const copy = (text, label) => navigator.clipboard.writeText(text).then(() => say(label + ' copied')).catch(() => say(label));
+    const coarse = window.matchMedia('(pointer: coarse)').matches;
 
+    // n = command, h = hint shown, k = extra words people type for it (synonyms).
+    // Changing these? Run: node tests/console-search.mjs
     const CMDS = [
-        { n: 'about',      h: 'Who I am',                        k: 'profile bio',            run: () => jump('#about') },
-        { n: 'experience', h: 'Open the deployment log',         k: 'work history roles',     run: () => jump('#experience') },
-        { n: 'skills',     h: 'Capabilities',                    k: 'stack ai agentic',       run: () => jump('#skills') },
-        { n: 'education',  h: 'Credentials',                     k: 'degrees certifications', run: () => jump('#education') },
-        { n: 'contact',    h: 'Get in touch',                    k: 'reach hire talk',        run: () => jump('#contact') },
-        { n: 'resume',     h: 'Open Profile.pdf',                k: 'cv download résumé',     run: () => pop('Profile.pdf') },
-        { n: 'email',      h: 'pkonduru4@gmail.com',             k: 'mail write',             run: () => { palClose(); location.href = 'mailto:pkonduru4@gmail.com'; } },
-        { n: 'copy email', h: 'Copy address to clipboard',       k: 'clipboard',              run: () => navigator.clipboard.writeText('pkonduru4@gmail.com').then(() => say('pkonduru4@gmail.com copied')).catch(() => say('copy blocked by browser: pkonduru4@gmail.com')) },
-        { n: 'linkedin',   h: 'linkedin.com/in/prateek-konduru', k: 'social profile',         run: () => pop('https://www.linkedin.com/in/prateek-konduru/') },
-        { n: 'github',     h: 'github.com/prateekkonduru',       k: 'code repos',             run: () => pop('https://github.com/prateekkonduru') },
-        { n: 'source',     h: 'How this site is built',          k: 'repo code view',         run: () => pop('https://github.com/prateekkonduru/prateekkonduru.github.io') },
-        { n: 'whoami',     h: 'One-liner',                       k: 'identity',               run: () => say('Prateek Konduru. AI Solutions Leader at Ushur, San Jose, CA.') },
-        { n: 'deploy',     h: 'Ship it',                         k: 'production',             run: () => say('Already in production.') },
-        { n: 'help',       h: 'List commands',                   k: '?',                      run: () => say(CMDS.map(c => c.n).join(', ')) }
+        { n: 'about',      h: 'Who I am',                        k: 'profile bio summary who',                               run: () => jump('#about') },
+        { n: 'experience', h: 'Open the deployment log',         k: 'work history roles jobs career employment ushur oracle miller efi zendesk',             run: () => jump('#experience') },
+        { n: 'skills',     h: 'Capabilities',                    k: 'stack ai agentic tech technologies tools capabilities', run: () => jump('#skills') },
+        { n: 'education',  h: 'Credentials',                     k: 'degrees certifications certs credentials school university', run: () => jump('#education') },
+        { n: 'contact',    h: 'Get in touch',                    k: 'reach hire talk connect',                               run: () => jump('#contact') },
+        { n: 'resume',     h: 'Open Profile.pdf',                k: 'cv curriculum vitae download pdf résumé',                                run: () => pop('Profile.pdf') },
+        { n: 'email',      h: 'pkonduru4@gmail.com',             k: 'mail write e-mail address',                                     run: () => { palClose(); location.href = 'mailto:pkonduru4@gmail.com'; } },
+        { n: 'copy email', h: 'Copy address to clipboard',       k: 'clipboard',                                             run: () => copy('pkonduru4@gmail.com', 'pkonduru4@gmail.com') },
+        { n: 'phone',      h: '+1 (408) 334-6791',               k: 'call number mobile tel',                                run: () => { if (coarse) { palClose(); location.href = 'tel:+14083346791'; } else copy('+1 408 334 6791', '+1 (408) 334-6791'); } },
+        { n: 'linkedin',   h: 'linkedin.com/in/prateek-konduru', k: 'social profile connect',                                run: () => pop('https://www.linkedin.com/in/prateek-konduru/') },
+        { n: 'github',     h: 'github.com/prateekkonduru',       k: 'repos projects profile git',                            run: () => pop('https://github.com/prateekkonduru') },
+        { n: 'source',     h: 'How this site is built',          k: 'repo code view site built',                             run: () => pop('https://github.com/prateekkonduru/prateekkonduru.github.io') },
+        { n: 'top',        h: 'Back to the top',                 k: 'home start hero beginning up',                          run: () => jump('#top') },
+        { n: 'whoami',     h: 'One-liner',                       k: 'identity',                                              run: () => say('Prateek Konduru. AI Solutions Leader at Ushur, San Jose, CA.') },
+        { n: 'deploy',     h: 'Ship it',                         k: 'production',                                            run: () => say('Already in production.') },
+        { n: 'help',       h: 'List commands',                   k: '? commands list ls',                                    run: () => say(CMDS.map(c => c.n).join(', ')) }
     ];
 
+    /* search:start  (pure functions; tests/console-search.mjs evaluates this exact block) */
+    // Words people wrap around a command ("contact me", "open resume") but that never pick one
+    const STOP = new Set(['me', 'my', 'i', 'the', 'a', 'an', 'to', 'of', 'in', 'and', 'with', 'is', 'are', 'your', 'you', 'show', 'open', 'go', 'see', 'please', 'for', 'what', 'how', 'do', 'can', 'want', 'send', 'get', 'out']);
+    // Lowercase, strip accents (résumé -> resume), join hyphenated words (e-mail -> email)
+    function words(s) {
+        return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
+            .replace(/(\w)-(\w)/g, '$1$2').split(/[^a-z0-9?]+/).filter(Boolean);
+    }
+    // Edit distance with transpositions, giving up as soon as it exceeds max
+    function dist(a, b, max) {
+        if (Math.abs(a.length - b.length) > max) return max + 1;
+        let prev2 = null, prev = Array.from({ length: b.length + 1 }, (_, j) => j);
+        for (let i = 1; i <= a.length; i++) {
+            const cur = [i];
+            let rowMin = i;
+            for (let j = 1; j <= b.length; j++) {
+                let v = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+                if (prev2 && i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) v = Math.min(v, prev2[j - 2] + 1);
+                cur.push(v);
+                if (v < rowMin) rowMin = v;
+            }
+            if (rowMin > max) return max + 1;
+            prev2 = prev; prev = cur;
+        }
+        return prev[b.length];
+    }
+    // How well one typed word matches one indexed word: exact > prefix > typo
+    function tokenScore(t, w) {
+        if (w === t) return 10;
+        if (w.startsWith(t)) return 6;
+        if (w.length < 4) return 0;                       // never fuzzy-match short words ('blog' must not hit 'log')
+        const max = t.length >= 8 ? 2 : t.length >= 4 ? 1 : 0;
+        if (!max) return 0;
+        if (dist(t, w, max) <= max) return 3;             // typo: 'linkdin' -> linkedin
+        if (w.length > t.length && dist(t, w.slice(0, t.length), max) <= max) return 2;   // typo in a prefix: 'certs' -> certifications
+        return 0;
+    }
+    // Every meaningful typed word must match; a hit on the command's own name counts double
+    function rankCommands(cmds, query) {
+        const q = words(query).filter(t => !STOP.has(t));
+        if (!q.length) return cmds.slice();
+        const hits = rankTokens(cmds, q);
+        // Nothing matched every word? Try them joined: 'git hub' -> github, 'linked in' -> linkedin
+        return hits.length || q.length < 2 ? hits : rankTokens(cmds, [q.join('')]);
+    }
+    function rankTokens(cmds, q) {
+        const scored = [];
+        cmds.forEach((c, order) => {
+            const name = words(c.n), hay = words(c.n + ' ' + c.h + ' ' + c.k);
+            let total = 0;
+            for (const t of q) {
+                let best = 0;
+                for (const w of name) best = Math.max(best, tokenScore(t, w) * 2);
+                for (const w of hay) best = Math.max(best, tokenScore(t, w));
+                if (!best) return;
+                total += best;
+            }
+            scored.push({ c, total, order });
+        });
+        return scored.sort((a, b) => b.total - a.total || a.order - b.order).map(s => s.c);
+    }
+    /* search:end */
+
     function palRender(q) {
-        const s = q.trim().toLowerCase();
-        // Rank: exact command name, then name prefix, then name substring, then hint/keyword hit
-        const score = c => c.n === s ? 3 : c.n.startsWith(s) ? 2 : c.n.includes(s) ? 1 : 0;
-        palItems = CMDS.filter(c => !s || (c.n + ' ' + c.h + ' ' + c.k).toLowerCase().includes(s));
-        if (s) palItems = palItems.slice().sort((a, b) => score(b) - score(a));
+        palItems = rankCommands(CMDS, q);
         palSel = 0;
         palList.innerHTML = palItems.length
             ? palItems.map((c, i) => '<li class="pal-item" id="pi-' + i + '" role="option" aria-selected="' + (i === palSel) + '"><span class="pi-name">' + c.n + '</span><span class="pi-hint">' + c.h + '</span></li>').join('')
-            : '<li class="pal-empty">no matching command</li>';
+            : '<li class="pal-empty">no matching command. try "help"</li>';
         palInput.setAttribute('aria-activedescendant', palItems.length ? 'pi-0' : '');
     }
     function palMove(d) {
@@ -1521,6 +1632,7 @@
         palInput.setAttribute('aria-activedescendant', 'pi-' + palSel);
         palList.children[palSel].scrollIntoView({ block: 'nearest' });
     }
+    function palRun(c) { track('console-' + c.n.replace(/\s+/g, '-')); c.run(); }
     function palOpen() {
         palPrevFocus = document.activeElement;
         pal.hidden = false;
@@ -1530,6 +1642,7 @@
         palOut.hidden = true;
         palRender('');
         palInput.focus();
+        track('console-open');
     }
     function palClose() {
         pal.hidden = true;
@@ -1545,7 +1658,7 @@
         const li = e.target.closest('.pal-item');
         if (!li) return;
         const i = [...palList.children].indexOf(li);
-        if (palItems[i]) palItems[i].run();
+        if (palItems[i]) palRun(palItems[i]);
     });
     palInput.addEventListener('input', () => { palOut.hidden = true; palRender(palInput.value); });
     document.addEventListener('keydown', e => {
@@ -1559,8 +1672,46 @@
         else if (e.key === 'Tab') { e.preventDefault(); palInput.focus(); }
         else if (e.key === 'ArrowDown') { e.preventDefault(); palMove(1); }
         else if (e.key === 'ArrowUp') { e.preventDefault(); palMove(-1); }
-        else if (e.key === 'Enter') { e.preventDefault(); if (palItems[palSel]) palItems[palSel].run(); }
+        else if (e.key === 'Enter') { e.preventDefault(); if (palItems[palSel]) palRun(palItems[palSel]); }
     });
+
+    /* ================= Analytics loader + field metrics (only when enabled) ================= */
+    if (GOATCOUNTER) {
+        const s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://gc.zgo.at/count.js';
+        s.dataset.goatcounter = 'https://' + GOATCOUNTER + '.goatcounter.com/count';
+        document.head.appendChild(s);
+
+        // Conversion clicks
+        document.addEventListener('click', e => {
+            const a = e.target.closest('a');
+            if (!a) return;
+            const href = a.getAttribute('href') || '';
+            if (href.endsWith('Profile.pdf')) track('click-resume');
+            else if (href.startsWith('mailto:')) track('click-email');
+            else if (href.startsWith('tel:')) track('click-phone');
+            else if (href.includes('linkedin.com')) track('click-linkedin');
+            else if (href.includes('github.com')) track('click-github');
+        });
+
+        // Real-visitor Core Web Vitals, bucketed with Google's thresholds (vitals-lcp-good, ...).
+        // Approximations, not the web-vitals library: CLS is a plain sum, INP the slowest interaction.
+        const grade = (v, good, poor) => v <= good ? 'good' : v <= poor ? 'needs-improvement' : 'poor';
+        let lcp = 0, cls = 0, inp = 0, sent = false;
+        try {
+            new PerformanceObserver(l => { const e = l.getEntries().pop(); if (e) lcp = e.startTime; }).observe({ type: 'largest-contentful-paint', buffered: true });
+            new PerformanceObserver(l => { for (const e of l.getEntries()) if (!e.hadRecentInput) cls += e.value; }).observe({ type: 'layout-shift', buffered: true });
+            new PerformanceObserver(l => { for (const e of l.getEntries()) if (e.interactionId) inp = Math.max(inp, e.duration); }).observe({ type: 'event', durationThreshold: 40, buffered: true });
+        } catch (_) { /* older browsers: skip field metrics */ }
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState !== 'hidden' || sent) return;
+            sent = true;
+            if (lcp) track('vitals-lcp-' + grade(lcp, 2500, 4000));
+            track('vitals-cls-' + grade(cls, 0.1, 0.25));
+            if (inp) track('vitals-inp-' + grade(inp, 200, 500));
+        });
+    }
 })();
 </script>
 

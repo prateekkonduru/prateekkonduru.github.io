@@ -37,9 +37,12 @@ role, primary CTA).
 - **Martian Mono** 400-600: dates, chips, labels (11-12.5px, letter-spacing 0.08-0.14em, uppercase)
 - Emphasis inside a headline: weight/width of the same family, never a second family
 - Both families are **self-hosted** from `fonts/` as variable woff2, declared in
-  `@font-face` with `font-display: swap` and preloaded. The page makes zero external
+  `@font-face` and preloaded. The page makes zero external
   requests: do not reintroduce a Google Fonts `<link>`. To change a weight or width,
   adjust the axis in CSS rather than fetching another file
+- Archivo uses `font-display: swap` (it carries the name, it must show). Martian Mono uses
+  `optional`: it only sets labels, and a late swap re-wrapped the hero pill and failed
+  mobile CLS (0.131). Keep it `optional`
 
 ## Shape and space
 
@@ -52,7 +55,11 @@ role, primary CTA).
 
 - Easings: `--eo: cubic-bezier(0.23,1,0.32,1)` (enter/exit), `--eio: cubic-bezier(0.77,0,0.175,1)` (on-screen movement)
 - Reveals: `.rv` + IntersectionObserver adds `.in`; stagger via `--d` (60-100ms steps)
-- Hero: line-mask rise on load (`html.ready`), blinking amber caret
+- Hero: line-mask rise on load (`html.ready`), blinking amber caret. Other hero elements are
+  visible from the first paint and settle with a transform-only 10px rise: never fade the
+  hero in from opacity 0, it delays LCP
+- Field: motion is time-based (dt scaled to 60fps), so it runs the same speed on 120Hz
+  screens; strokes are batched into two paths per frame; it starts after first paint
 - All hidden-until-reveal states are gated on `html.js`; print resets them
 - `prefers-reduced-motion`: reveals instant, canvas renders one static frame, caret/pulse stop
 - Buttons: `:active { scale(0.97) }`, arrow glyphs translate on hover, transitions 160-300ms

@@ -9,6 +9,7 @@ Live at: https://prateekkonduru.github.io
 - `index.html` - the live single-file portfolio ("deployment record" design), served at the root
 - `404.html` - custom not-found page ("route not deployed")
 - `fonts/` - self-hosted variable fonts (Archivo, Martian Mono); the site makes zero external requests
+- `tests/console-search.mjs` - eval for the ⌘K console search (`node tests/console-search.mjs`, zero dependencies)
 - `Profile.pdf` - résumé download
 - `og.png` - social share card (1200x630), regenerate from the hero if the design changes
 - `favicon.png` / `favicon.ico` / `apple-touch-icon.png` - the "PK + caret" brand mark (regenerate from a 512px tile if the brand changes)
@@ -38,6 +39,13 @@ forward-deployed identity:
 - `robots.txt` explicitly welcomes AI crawlers (GPTBot, ClaudeBot, PerplexityBot, Google-Extended)
 - `llms.txt` gives AI assistants a structured profile summary
 - After deploying, submit `sitemap.xml` in Google Search Console
+
+## Analytics
+
+Off by default. Set `GOATCOUNTER` near the top of the script in `index.html` to a
+[GoatCounter](https://www.goatcounter.com) site code to enable cookieless page views, conversion-click
+events (résumé, email, phone, LinkedIn, GitHub), console usage, and bucketed real-visitor Core Web Vitals.
+While it is empty, nothing loads and no request leaves the page.
 
 No build step: edit `index.html` directly and push.
 

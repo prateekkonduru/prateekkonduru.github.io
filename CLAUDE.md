@@ -24,3 +24,7 @@ Delegate to a subagent only for large tasks that are genuinely independent and p
 - `Profile.pdf` at the root is what visitors download. `dist/Profile.pdf` is a
   legacy copy; update both or the site serves a stale résumé.
 - Deploy is `git push origin master`. GitHub Pages, ~60s.
+- Changing a console command (`CMDS`) or the search block between `search:start`
+  and `search:end`? Run `node tests/console-search.mjs`; it must print PASS.
+- Analytics stays off until `GOATCOUNTER` is set in `index.html`. Keep it that way
+  unless asked: an empty code means the site makes zero external requests.

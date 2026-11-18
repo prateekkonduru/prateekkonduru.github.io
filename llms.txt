@@ -4,9 +4,9 @@
 
 Key facts:
 
-- Current role: Manager, AI Solution Acceleration & Forward Deployment at Ushur (Dec 2025 - present); four promotions at Ushur since Oct 2023
+- Current role: Manager, AI Solution Acceleration & Forward Deployment at Ushur (Jan 2026 - present); four promotions at Ushur since Oct 2023
 - Track record: 60% lift in process automation, 85% reduction in manual intervention, $750K/year operational savings from reusable AI accelerators, team of 5 forward-deployed engineers across a $10M+ portfolio, 98% CSAT
-- Current focus: agentic AI in enterprise production (multi-agent systems, MCP, tool calling, LangGraph, LLM evals, guardrails)
+- Current focus: agentic AI in enterprise production (agentic workflows, LLM-powered agents, RAG pipelines, prompt engineering, LLM fine-tuning)
 - Earlier roles: Graduate Technical Consultant at Miller Center for Social Entrepreneurship (2021-2023); Solutions Engineer at Oracle (2019-2021); internships at EFI and Zendesk
 - Education: M.S. Computer Science & Engineering, Santa Clara University (2023); B.Tech Computer Engineering, PES University (2019)
 - Certifications: AWS Certified Developer, Google Professional Machine Learning Engineer, Oracle Solutions Architect Associate, Oracle Autonomous Database Specialist
