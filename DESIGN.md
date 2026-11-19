@@ -61,6 +61,15 @@ role, primary CTA).
 - Field: motion is time-based (dt scaled to 60fps), so it runs the same speed on 120Hz
   screens; strokes are batched into two paths per frame; it starts after first paint
 - All hidden-until-reveal states are gated on `html.js`; print resets them
+- Motion layer, all keyed on `html.motion` (set only when reduced motion is off):
+  section headlines rise word by word, section rules draw in, chips cascade, key
+  figures count up at fixed width, the brand decodes on load and hover, CTAs lean
+  toward the cursor, capability panels carry a cursor spotlight
+- Scroll-linked pieces (amber reading-progress line, hero recede, ladder filling
+  amber) use CSS scroll timelines only; browsers without them just don't show them.
+  Never add a `scroll` event listener
+- The nav marks the current section (`aria-current`); that's a state cue, so it
+  stays on under reduced motion
 - `prefers-reduced-motion`: reveals instant, canvas renders one static frame, caret/pulse stop
 - Buttons: `:active { scale(0.97) }`, arrow glyphs translate on hover, transitions 160-300ms
 

@@ -324,7 +324,7 @@
             text-decoration: none;
             cursor: pointer;
             border: 1px solid transparent;
-            transition: transform 0.16s var(--eo), background 0.2s var(--eo),
+            transition: translate 0.4s var(--eo), transform 0.16s var(--eo), background 0.2s var(--eo),
                         border-color 0.2s var(--eo), color 0.2s var(--eo);
             white-space: nowrap;
         }
@@ -808,6 +808,70 @@
             .role-when { white-space: normal; }
         }
 
+        /* ============================== MOTION LAYER ==============================
+           Everything here is keyed on html.motion, which the script only sets when
+           the visitor has not asked for reduced motion. Transform/opacity only, no
+           scroll listeners: scroll-linked pieces use CSS scroll timelines where the
+           browser has them and simply don't exist where it doesn't. */
+        .progress { display: none; }
+        .nav-links a:not(.btn) { position: relative; }
+        .nav-links a:not(.btn)::after {
+            content: ''; position: absolute; left: 14px; right: 14px; bottom: 5px; height: 1px;
+            background: var(--amber); transform: scaleX(0); transform-origin: left;
+            transition: transform 0.35s var(--eo);
+        }
+        .nav-links a[aria-current="true"] { color: var(--ink); }
+        .nav-links a[aria-current="true"]::after { transform: scaleX(1); }
+
+        /* Section headlines rise word by word out of a mask */
+        html.motion .h2.rv { opacity: 1; translate: 0 0; }
+        html.motion .h2 .w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.16em; margin-bottom: -0.16em; }
+        html.motion .h2 .w > span { display: inline-block; transform: translateY(112%); transition: transform 0.85s var(--eo); transition-delay: calc(var(--i, 0) * 60ms); }
+        html.motion .h2.in .w > span { transform: none; }
+
+        /* Section rules draw in from the left instead of just being there */
+        html.motion #about, html.motion #experience, html.motion #skills, html.motion #education, html.motion #contact { position: relative; border-top-color: transparent; }
+        html.motion main > section:not(.hero)::before {
+            content: ''; position: absolute; top: -1px; left: 0; right: 0; height: 1px;
+            background: var(--line-soft); transform: scaleX(0); transform-origin: left;
+            transition: transform 1.3s var(--eio);
+        }
+        html.motion main > section.seen::before { transform: scaleX(1); }
+
+        /* Capability chips cascade in after their panel; panels get a cursor spotlight */
+        html.motion .cap .chip { opacity: 0; translate: 0 6px; transition: opacity 0.5s var(--eo), translate 0.5s var(--eo); transition-delay: calc(var(--i, 0) * 24ms + 180ms); }
+        html.motion .cap.in .chip { opacity: 1; translate: 0 0; }
+        .cap { position: relative; overflow: hidden; }
+        @media (hover: hover) and (pointer: fine) {
+            html.motion .cap::after {
+                content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0;
+                background: radial-gradient(280px circle at var(--mx, 50%) var(--my, 50%), oklch(80% 0.148 72 / 0.09), transparent 70%);
+                transition: opacity 0.35s var(--eo);
+            }
+            html.motion .cap:hover::after { opacity: 1; }
+        }
+
+        .ladder .role::before { z-index: 1; }
+        @supports (animation-timeline: scroll()) {
+            /* Reading progress, amber hairline along the top edge */
+            html.motion .progress {
+                display: block; position: fixed; inset: 0 0 auto 0; height: 2px; z-index: 150;
+                background: var(--amber); transform-origin: left; transform: scaleX(0);
+                animation: progress linear both; animation-timeline: scroll(root);
+            }
+            /* The hero recedes as it scrolls away */
+            html.motion .hero .wrap { animation: heroOut linear both; animation-timeline: view(); animation-range: exit 0% exit 90%; }
+            /* The promotion ladder fills amber as you read down it */
+            html.motion .ladder::after {
+                content: ''; position: absolute; left: 3px; top: 10px; bottom: 10px; width: 1px;
+                background: var(--amber); transform: scaleY(0); transform-origin: top;
+                animation: ladderFill linear both; animation-timeline: view(); animation-range: cover 18% cover 62%;
+            }
+        }
+        @keyframes progress { to { transform: scaleX(1); } }
+        @keyframes heroOut { to { opacity: 0.12; transform: translateY(-56px); } }
+        @keyframes ladderFill { to { transform: scaleY(1); } }
+
         /* ============================== PRINT ==============================
            The page becomes a paper resume: light ink theme, interactive
            chrome removed, link destinations spelled out. Must stay LAST in
@@ -832,6 +896,11 @@
             html { scroll-padding-top: 0; }
             html.js .rv, html.js .hero .rv, html.js .mask > span { opacity: 1; translate: 0 0; transform: none; transition: none; }
             html.js .ladder::before { transform: scaleY(1); }
+            html.motion .h2 .w > span { transform: none; }
+            html.motion .cap .chip { opacity: 1; translate: 0 0; }
+            html.motion #about, html.motion #experience, html.motion #skills, html.motion #education, html.motion #contact { border-top-color: var(--line-soft); }
+            html.motion main > section:not(.hero)::before, html.motion .progress, html.motion .ladder::after, html.motion .cap::after { display: none; }
+            html.motion .hero .wrap { animation: none; }
             body { background: #ffffff; color: var(--ink); font-size: 11pt; line-height: 1.5; }
             header, #field, .pal, .skip, .hero-cta, .caret, .pulse, footer { display: none !important; }
 
@@ -878,10 +947,11 @@
 <body>
 
 <a class="skip" href="#main">Skip to content</a>
+<div class="progress" aria-hidden="true"></div>
 
 <header id="hdr">
     <div class="wrap nav">
-        <a class="brand" href="#top">PRATEEK<b>_</b>KONDURU</a>
+        <a class="brand" href="#top" aria-label="Prateek Konduru, back to top">PRATEEK<b>_</b>KONDURU</a>
         <nav class="nav-links" id="navLinks" aria-label="Primary">
             <a href="#about">About</a>
             <a href="#experience">Experience</a>
@@ -1316,6 +1386,104 @@
         }, { threshold: [0.92] }).observe(hero);
     } else {
         hdr.classList.add('solid');
+    }
+
+    /* ================= Motion layer =================
+       Only for visitors who haven't asked for reduced motion. Each piece is
+       independent, so one failing can't take the others (or the page) down. */
+    if (!reduce) {
+        document.documentElement.classList.add('motion');
+        const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+        const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+        // Section headlines: wrap each word so it can rise out of a mask
+        document.querySelectorAll('h2.h2').forEach(h => {
+            const text = h.textContent.trim();
+            h.setAttribute('aria-label', text);
+            h.innerHTML = text.split(/\s+/).map((w, i) => '<span class="w" aria-hidden="true"><span style="--i:' + i + '">' + esc(w) + '</span></span>').join(' ');
+        });
+
+        // Chips cascade in order
+        document.querySelectorAll('.chips').forEach(c => [...c.children].forEach((chip, i) => chip.style.setProperty('--i', i)));
+
+        // Section rules draw in when the section arrives
+        const sections = document.querySelectorAll('main > section:not(.hero)');
+        if (hasIO) {
+            const lineIO = new IntersectionObserver(es => es.forEach(e => {
+                if (e.isIntersecting) { e.target.classList.add('seen'); lineIO.unobserve(e.target); }
+            }), { rootMargin: '0px 0px -8% 0px' });
+            sections.forEach(s => lineIO.observe(s));
+        } else sections.forEach(s => s.classList.add('seen'));
+
+        // Key figures count up once, at a fixed width so nothing around them moves
+        function countUp(el) {
+            const m = el.textContent.match(/^(\D*)(\d+)(.*)$/);
+            if (!m || el.getClientRects().length !== 1) return;      // skip if it wraps across lines
+            const pre = m[1], end = +m[2], post = m[3];
+            el.style.display = 'inline-block';
+            el.style.minWidth = el.getBoundingClientRect().width + 'px';
+            const t0 = performance.now();
+            (function tick(t) {
+                const p = Math.min((t - t0) / 1100, 1);
+                el.textContent = pre + Math.round(end * (1 - Math.pow(1 - p, 4))) + post;
+                if (p < 1) requestAnimationFrame(tick);
+                else { el.style.display = ''; el.style.minWidth = ''; }
+            })(t0);
+        }
+        if (hasIO) {
+            const kIO = new IntersectionObserver(es => es.forEach(e => {
+                if (e.isIntersecting) { kIO.unobserve(e.target); countUp(e.target); }
+            }), { threshold: 1 });
+            document.querySelectorAll('.k').forEach(el => kIO.observe(el));
+        }
+
+        // Brand mark decodes like a console readout: once on load, again on hover
+        function scramble(el) {
+            if (el._busy) return;
+            el._busy = true;
+            const nodes = [...el.childNodes].filter(n => n.nodeType === 3 && n.textContent.trim());
+            const orig = nodes.map(n => n.textContent), G = 'ABCDEFGHJKLMNPQRSTUVWXYZ0123456789/<>';
+            const t0 = performance.now();
+            (function tick(t) {
+                const p = Math.min((t - t0) / 560, 1);
+                nodes.forEach((n, k) => {
+                    const s = orig[k], done = Math.floor(p * s.length);
+                    n.textContent = s.slice(0, done) + [...s.slice(done)].map(() => G[Math.random() * G.length | 0]).join('');
+                });
+                if (p < 1) requestAnimationFrame(tick);
+                else { nodes.forEach((n, k) => { n.textContent = orig[k]; }); el._busy = false; }
+            })(t0);
+        }
+        const brand = document.querySelector('.brand');
+        setTimeout(() => scramble(brand), 700);
+
+        if (finePointer) {
+            brand.addEventListener('pointerenter', () => scramble(brand));
+            // Primary buttons lean toward the cursor and spring back
+            document.querySelectorAll('.hero-cta .btn, .contact-cta .btn, .nav-links .btn').forEach(b => {
+                b.addEventListener('pointermove', e => {
+                    const r = b.getBoundingClientRect();
+                    b.style.translate = ((e.clientX - r.left - r.width / 2) * 0.22).toFixed(1) + 'px ' + ((e.clientY - r.top - r.height / 2) * 0.3).toFixed(1) + 'px';
+                });
+                b.addEventListener('pointerleave', () => { b.style.translate = ''; });
+            });
+            // Capability panels: spotlight follows the cursor
+            document.querySelectorAll('.cap').forEach(c => c.addEventListener('pointermove', e => {
+                const r = c.getBoundingClientRect();
+                c.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+                c.style.setProperty('--my', (e.clientY - r.top) + 'px');
+            }));
+        }
+    }
+
+    // Nav shows which section you're in (a state cue, so it stays on under reduced motion)
+    if (hasIO) {
+        const navA = new Map([...links.querySelectorAll('a[href^="#"]:not(.btn)')].map(a => [a.getAttribute('href').slice(1), a]));
+        const spy = new IntersectionObserver(es => es.forEach(e => {
+            const a = navA.get(e.target.id);
+            if (a) e.isIntersecting ? a.setAttribute('aria-current', 'true') : a.removeAttribute('aria-current');
+        }), { rootMargin: '-45% 0px -50% 0px' });
+        navA.forEach((_, id) => { const s = document.getElementById(id); if (s) spy.observe(s); });
     }
 
     // Reveal-on-scroll (single observer, unobserve after firing)
